@@ -16,9 +16,9 @@ void setup () {
   // Text stuff
   title = createFont("Georgia", 120);
   ChooseFighter = createFont("Georgia", 120);
-
-  theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3");
-  theme.loop();
+  
+  theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3"); 
+  theme.loop(); 
 }
 
 void draw () {
@@ -32,9 +32,9 @@ void draw () {
   text("Choose your Fighter!", 180, 150);
   fill(#F7D882);
   rect(0, 180, 600, 600);
-  println(theme.isPlaying());
 
-    fill(#FCFAF5);
+
+  fill(#FCFAF5); 
   for (int y = 0; y < 2; y++) {
     for (int x = 0; x < 3; x++) {
       rect(x * (len + spacing), y * (len + spacing) + 240, len, len);
