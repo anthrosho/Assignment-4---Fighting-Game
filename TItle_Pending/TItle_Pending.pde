@@ -95,71 +95,67 @@ void draw() {
   }
 }
 
+int fighterCount = 0; // Single variable to track the number of characters selected
+
 void mousePressed() {
 
   // Character Selection
   if (buttonPressed) {
     // Character selection rectangle checks
     if (mouseX >= 0 && mouseX <= 150 && mouseY >= 180 && mouseY <= 380) {
-      println("KYLE");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = Kyle;
         println("character1 is KYLE");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = Kyle;
         println("character2 is KYLE");
       }
-      fighterCount1++;
+      fighterCount++; // Increment fighterCount after assignment
     } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 180 && mouseY <= 380) {
-      println("JULIA");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = Julia;
         println("character1 is JULIA");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = Julia;
         println("character2 is JULIA");
       }
-      fighterCount1++;
+      fighterCount++;
     } else if (mouseX >= 300 && mouseX <= 450 && mouseY >= 180 && mouseY <= 380) {
-      println("RAVANDU");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = Ravandu;
         println("character1 is RAVANDU");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = Ravandu;
         println("character2 is RAVANDU");
       }
-      fighterCount1++;
+      fighterCount++;
     } else if (mouseX >= 450 && mouseX <= 600 && mouseY >= 180 && mouseY <= 380) {
-      println("LIAM");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = Liam;
         println("character1 is LIAM");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = Liam;
         println("character2 is LIAM");
       }
-      fighterCount1++;
+      fighterCount++;
     } else if (mouseX >= 0 && mouseX <= 150 && mouseY >= 380 && mouseY <= 580) {
-      println("DAVID");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = David;
         println("character1 is DAVID");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = David;
         println("character2 is DAVID");
       }
-      fighterCount1++;
+      fighterCount++;
     } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 380 && mouseY <= 580) {
-      println("KRAIG");
-      if (fighterCount1 == 0) {
+      if (fighterCount == 0) {
         character1 = Kraig;
         println("character1 is KRAIG");
-      } else {
+      } else if (fighterCount == 1) {
         character2 = Kraig;
         println("character2 is KRAIG");
       }
-      fighterCount1++;
+      fighterCount++;
     }
   } else if (mouseX >= 0 && mouseX <= 150 && mouseY >= 280 && mouseY <= 380) {
     // Play button clicked
