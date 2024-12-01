@@ -10,7 +10,8 @@ int spacing = 120;
 int len = 120;
 int selectionBox = 7;
 
-boolean buttonPressed = false; // Correctly define as a boolean
+boolean buttonPressed = false;
+boolean characterSelect = false;
 
 PImage Kyle;
 PImage Julia;
@@ -57,7 +58,7 @@ void draw() {
   fill(#030202);
   text("Names not decided.", 20, 160);
   fill(#DBD9D9);
-  rect(0, 280, 150, 100); // Play button background
+  rect(0, 280, 150, 100); // Creates button
 
   textFont(Play, 20);
   fill(#030303);
@@ -71,16 +72,31 @@ void draw() {
   image(David, 300, 100);
   image(Kraig, 320, 120);
 
-  // Transition logic
+  // Transition
   if (buttonPressed) {
-    background(255);
-    transition.select();
+    transition.select(); // Call the select method in the transition object
   }
 }
 
 void mousePressed() {
-  // Detect if the Play button is clicked
-  if (mouseX >= 0 && mouseX <= 150 && mouseY >= 280 && mouseY <= 380) {
-    buttonPressed = true; // Set buttonPressed to true
+  if (buttonPressed) { 
+    // Character selection rectangle checks
+    if (mouseX >= 0 && mouseX <= 150 && mouseY >= 180 && mouseY <= 380) {
+      println("KYLE");
+    } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 180 && mouseY <= 380) {
+      println("JULIA");
+    } else if (mouseX >= 300 && mouseX <= 450 && mouseY >= 180 && mouseY <= 380) {
+      println("RAVANDU");
+    } else if (mouseX >= 450 && mouseX <= 600 && mouseY >= 180 && mouseY <= 380) {
+      println("LIAM");
+    } else if (mouseX >= 0 && mouseX <= 150 && mouseY >= 380 && mouseY <= 580) {
+      println("DAVID");
+    } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 380 && mouseY <= 580) {
+      println("KRAIG");
+    }
+  } else if (mouseX >= 0 && mouseX <= 150 && mouseY >= 280 && mouseY <= 380) {
+
+    buttonPressed = true; 
+    characterSelect = true;
   }
 }

@@ -1,9 +1,30 @@
 class characterSelection {
 
   void select() {
-    background(#FAF5E8); 
+    background(#FAF5E8);
     fill(#FFDBB7);
     rect(0, 180, 600, 600); // Draw the enclosing rectangle
+
+    // image location
+    Kyle = loadImage("KyleDefault-removebg-preview.png");
+    Kyle.resize(100, 200);
+
+    Julia = loadImage("JuliaDefault-removebg-preview.png");
+    Julia.resize(100, 200);
+
+    Ravandu = loadImage("Ravandu-removebg-preview.png");
+    Ravandu.resize(100, 200);
+
+    Liam = loadImage("Liam-removebg-preview.png");
+    Liam.resize(100, 200);
+
+    David = loadImage("David-removebg-preview.png");
+    David.resize(100, 200);
+
+    Kraig = loadImage("Kraig_CharSelect-removebg-preview.png");
+    Kraig.resize(100, 200);
+
+
 
     // Draw title text
     textAlign(CENTER, CENTER); // Center-align the text horizontally and vertically
@@ -16,11 +37,18 @@ class characterSelection {
     for (int y = 180; y < 780; y += 200) { // Adjust the step for better distribution
       for (int x = 0; x < 600; x += 150) {
         if (count >= 6) break; // Stop once 6 rectangles are drawn
-        fill(#FFEBB2); 
-        rect(x, y, 150, 200); 
+        fill(#FFEBB2);
+        rect(x, y, 150, 200);
         count++;
       }
+      image(Kyle, 0, 180);
+      image(Julia, 180, 180);
+      image(Ravandu, 340, 180);
+      image(Liam, 480, 180);
+      image(David, 25, 390);
+      image(Kraig, 180, 390);
       if (count >= 6) break; // Exit the outer loop as well
     }
   }
+  
 }
