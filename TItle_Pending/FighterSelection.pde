@@ -1,8 +1,19 @@
-void Fighter1() {
-  
-}
+class FighterSelection {
 
 
-void Fighter2() {
-  
+  void Fighter1() {
+    
+    
+  }
+
+
+  void Fighter2() {
+  }
+
+
+  void Battle() {
+
+    
+    
+  }
 }
