@@ -1,19 +1,10 @@
 class FighterSelection {
 
 
-  void Fighter1() {
-    
-    
-  }
-
-
-  void Fighter2() {
-  }
-
-
   void Battle() {
-
-    
-    
+    background(255);
+      image(character1, 50, 60);
+    image(character2, 200, 60); 
+ 
   }
 }

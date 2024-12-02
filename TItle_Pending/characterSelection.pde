@@ -49,7 +49,17 @@ class characterSelection {
       image(David, 25, 390);
       image(Kraig, 180, 390);
       if (count >= 6) break; // Exit the outer loop as well
+      
+      
+      
+      
+      
     }
+      if (fighterCount >= 2) {
+    background(255); 
+    transition2.Battle();
+  
+  }
   }
   
 }
