@@ -1,4 +1,4 @@
-import processing.sound.*;
+import processing.sound.*; //<>//
 
 PFont title;
 PFont ChooseFighter;
@@ -24,6 +24,15 @@ PImage Liam;
 PImage David;
 PImage Kraig;
 
+
+PImage DFKyle;
+PImage DFJulia;
+PImage DFRavandu;
+PImage DFLiam;
+PImage DFDavid;
+PImage DFKraig;
+
+
 PImage character1;
 PImage character2;
 
@@ -37,7 +46,7 @@ SoundFile theme;
 void setup() {
   size(600, 600);
   transition = new characterSelection();
-  transition2= new FighterSelection(); 
+  transition2= new FighterSelection();
 
 
   // Text fonts
@@ -58,6 +67,15 @@ void setup() {
   David = loadImage("David-removebg-preview.png");
   Kraig = loadImage("Kraig_CharSelect-removebg-preview.png");
 
+  //Load Fight Images
+
+
+  DFKyle = loadImage("KyleFight.png");
+  DFJulia = loadImage("JuliaFight.png");
+  DFRavandu = loadImage("RavanduFight.png");
+  DFLiam = loadImage("LiamFight.png");
+  DFDavid = loadImage("DavidFight.png");
+  DFKraig = loadImage("KraigFight.png");
 }
 
 void draw() {
@@ -79,17 +97,18 @@ void draw() {
   text("Play", 50, 340);
 
   // Images
-  image(Kyle, 70, 100);
+  image(Kyle, 100, 100);
   image(Julia, 150, 100);
   image(Ravandu, 200, 100);
   image(Liam, 250, 100);
   image(David, 300, 100);
   image(Kraig, 320, 120);
-  
-  
-  
 
- //<>//
+
+
+
+
+
 
   // Transition
   if (buttonPressed) {
@@ -105,63 +124,59 @@ void mousePressed() {
     // Character selection rectangle checks
     if (mouseX >= 0 && mouseX <= 150 && mouseY >= 180 && mouseY <= 380) {
       if (fighterCount == 0) {
-        character1 = Kyle;
+        character1 = DFKyle;
         println("character1 is KYLE");
-        
       } else if (fighterCount == 1) {
-        character2 = Kyle;
+        character2 = DFKyle;
         println("character2 is KYLE");
-        
       }
-      fighterCount++; 
-      
+      fighterCount++;
     } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 180 && mouseY <= 380) {
       if (fighterCount == 0) {
-        character1 = Julia;
+        character1 = DFJulia;
         println("character1 is JULIA");
       } else if (fighterCount == 1) {
-        character2 = Julia;
+        character2 = DFJulia;
         println("character2 is JULIA");
       }
-      
+
       fighterCount++;
     } else if (mouseX >= 300 && mouseX <= 450 && mouseY >= 180 && mouseY <= 380) {
       if (fighterCount == 0) {
-        character1 = Ravandu;
+        character1 = DFRavandu;
         println("character1 is RAVANDU");
       } else if (fighterCount == 1) {
-        character2 = Ravandu;
+        character2 = DFRavandu;
         println("character2 is RAVANDU");
       }
-      
+
       fighterCount++;
     } else if (mouseX >= 450 && mouseX <= 600 && mouseY >= 180 && mouseY <= 380) {
       if (fighterCount == 0) {
-        character1 = Liam;
+        character1 = DFLiam;
         println("character1 is LIAM");
       } else if (fighterCount == 1) {
-        character2 = Liam;
+        character2 = DFLiam;
         println("character2 is LIAM");
       }
-      
+
       fighterCount++;
     } else if (mouseX >= 0 && mouseX <= 150 && mouseY >= 380 && mouseY <= 580) {
       if (fighterCount == 0) {
-        character1 = David;
+        character1 = DFDavid;
         println("character1 is DAVID");
       } else if (fighterCount == 1) {
-        character2 = David;
+        character2 = DFDavid;
         println("character2 is DAVID");
-        
       }
-      
+
       fighterCount++;
     } else if (mouseX >= 150 && mouseX <= 300 && mouseY >= 380 && mouseY <= 580) {
       if (fighterCount == 0) {
-        character1 = Kraig;
+        character1 = DFKraig;
         println("character1 is KRAIG");
       } else if (fighterCount == 1) {
-        character2 = Kraig;
+        character2 = DFKraig;
         println("character2 is KRAIG");
       }
       fighterCount++;
