@@ -5,17 +5,24 @@ PFont ChooseFighter;
 PFont Subtitle;
 PFont Play;
 
-
 int selectionBoxX = 50;
 int selectionBoxY = 80;
 int spacing = 120;
 int len = 120;
 int selectionBox = 7;
 int fighterCount = 0;
+int WeareFighting = 0;
+int battleCount = 0;
+int attackDelay = 0;
 
+int player1hp = 20; // ignore
+int player2hp = 20; // ignore
 
 boolean buttonPressed = false;
 boolean characterSelect = false;
+
+PImage character1Default;
+PImage character2Default;
 
 PImage Kyle;
 PImage Julia;
@@ -24,7 +31,6 @@ PImage Liam;
 PImage David;
 PImage Kraig;
 
-
 PImage DFKyle;
 PImage DFJulia;
 PImage DFRavandu;
@@ -32,22 +38,38 @@ PImage DFLiam;
 PImage DFDavid;
 PImage DFKraig;
 
+PImage FSKyle;
+PImage FSJulia;
+PImage FSRavandu;
+PImage FSLiam;
+PImage FSDavid;
+PImage FSKraig;
 
 PImage character1;
 PImage character2;
 
-
-
 //Objects
 characterSelection transition;
 FighterSelection transition2;
+BattleSystem actions;
+play Attack;
+play Defence;
+play Special;
+
 SoundFile theme;
 
 void setup() {
   size(600, 600);
   transition = new characterSelection();
-  transition2= new FighterSelection();
+  transition2 = new FighterSelection();
+  actions = new BattleSystem();
 
+  character1Default = character1;
+  character2Default = character2;
+
+  Attack = new play();
+  Defence = new play();
+  Special = new play();
 
   // Text fonts
   title = createFont("Georgia", 120);
@@ -67,15 +89,15 @@ void setup() {
   David = loadImage("David-removebg-preview.png");
   Kraig = loadImage("Kraig_CharSelect-removebg-preview.png");
 
-  //Load Fight Images
-
-
+  // Load Fight Images
   DFKyle = loadImage("KyleFight.png");
   DFJulia = loadImage("JuliaFight.png");
   DFRavandu = loadImage("RavanduFight.png");
   DFLiam = loadImage("LiamFight.png");
   DFDavid = loadImage("DavidFight.png");
   DFKraig = loadImage("KraigFight.png");
+
+  // Load Fighting Images
 }
 
 void draw() {
@@ -103,12 +125,7 @@ void draw() {
   image(Liam, 250, 100);
   image(David, 300, 100);
   image(Kraig, 320, 120);
-
-
-
-
-
-
+  println(battleCount);
 
   // Transition
   if (buttonPressed) {
@@ -116,9 +133,7 @@ void draw() {
   }
 }
 
-
 void mousePressed() {
-
   // Character Selection
   if (buttonPressed) {
     // Character selection rectangle checks
@@ -185,5 +200,106 @@ void mousePressed() {
     // Play button clicked
     buttonPressed = true;
     characterSelect = true;
+  }
+}
+
+void keyPressed() {
+  if (WeareFighting == 1) {
+    if (battleCount == 0) {  // Player A's turn
+      if (key == 'a') {
+        // Set the correct attack image for Player A
+        if (character1 == DFKyle) {
+          character1 = FSKyle;
+          println("Player A changes to attack pose: FSKyle");
+        } else if (character1 == DFJulia) {
+          character1 = FSJulia;
+          println("Player A changes to attack pose: FSJulia");
+        } else if (character1 == DFRavandu) {
+          character1 = FSRavandu;
+          println("Player A changes to attack pose: FSRavandu");
+        } else if (character1 == DFLiam) {
+          character1 = FSLiam;
+          println("Player A changes to attack pose: FSLiam");
+        } else if (character1 == DFDavid) {
+          character1 = FSDavid;
+          println("Player A changes to attack pose: FSDavid");
+        } else if (character1 == DFKraig) {
+          character1 = FSKraig;
+          println("Player A changes to attack pose: FSKraig");
+        }
+
+        battleCount = 1;  // Switch to Player B's turn
+        println("Next turn: Player B");
+      }
+    } else if (battleCount == 1) {  // Player B's turn
+      if (key == 'j') {  // Player B presses 'j'
+        // Set the correct attack image for Player B
+        if (character2 == DFKyle) {
+          character2 = FSKyle;
+          println("Player B changes to attack pose: FSKyle");
+        } else if (character2 == DFJulia) {
+          character2 = FSJulia;
+          println("Player B changes to attack pose: FSJulia");
+        } else if (character2 == DFRavandu) {
+          character2 = FSRavandu;
+          println("Player B changes to attack pose: FSRavandu");
+        } else if (character2 == DFLiam) {
+          character2 = FSLiam;
+          println("Player B changes to attack pose: FSLiam");
+        } else if (character2 == DFDavid) {
+          character2 = FSDavid;
+          println("Player B changes to attack pose: FSDavid");
+        } else if (character2 == DFKraig) {
+          character2 = FSKraig;
+          println("Player B changes to attack pose: FSKraig");
+        }
+        battleCount++;
+      }
+    }
+
+    if (battleCount == 2) {  // After both players have attacked
+      // Reset images for both players to fighting stance (DF images)
+      if (character1 == FSKyle) {
+        character1 = DFKyle;
+        println("Player A resets to DFKyle");
+      } else if (character1 == FSJulia) {
+        character1 = DFJulia;
+        println("Player A resets to DFJulia");
+      } else if (character1 == FSRavandu) {
+        character1 = DFRavandu;
+        println("Player A resets to DFRavandu");
+      } else if (character1 == FSLiam) {
+        character1 = DFLiam;
+        println("Player A resets to DFLiam");
+      } else if (character1 == FSDavid) {
+        character1 = DFDavid;
+        println("Player A resets to DFDavid");
+      } else if (character1 == FSKraig) {
+        character1 = DFKraig;
+        println("Player A resets to DFKraig");
+      }
+
+      if (character2 == FSKyle) {
+        character2 = DFKyle;
+        println("Player B resets to DFKyle");
+      } else if (character2 == FSJulia) {
+        character2 = DFJulia;
+        println("Player B resets to DFJulia");
+      } else if (character2 == FSRavandu) {
+        character2 = DFRavandu;
+        println("Player B resets to DFRavandu");
+      } else if (character2 == FSLiam) {
+        character2 = DFLiam;
+        println("Player B resets to DFLiam");
+      } else if (character2 == FSDavid) {
+        character2 = DFDavid;
+        println("Player B resets to DFDavid");
+      } else if (character2 == FSKraig) {
+        character2 = DFKraig;
+        println("Player B resets to DFKraig");
+      }
+      println("Both players have reset to fighting stance.");
+      // Reset battleCount for the next round
+    }
   }
 }

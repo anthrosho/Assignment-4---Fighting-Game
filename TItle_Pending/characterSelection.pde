@@ -41,7 +41,6 @@ class characterSelection {
         rect(x, y, 150, 200);
         count++;
       }
-      //image locations
       image(Kyle, 0, 200);
       image(Julia, 180, 200);
       image(Ravandu, 340, 200);
@@ -56,7 +55,6 @@ class characterSelection {
       
     }
       if (fighterCount >= 2) {
-    background(255); 
     transition2.Battle();
   
   }
