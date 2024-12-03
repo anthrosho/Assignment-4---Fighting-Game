@@ -56,32 +56,11 @@ play Attack;
 play Defence;
 play Special;
 
-SoundFile theme;
-
+SoundFile theme; 
 void setup() {
   size(600, 600);
-  transition = new characterSelection();
-  transition2 = new FighterSelection();
-  actions = new BattleSystem();
 
-  character1Default = character1;
-  character2Default = character2;
-
-  Attack = new play();
-  Defence = new play();
-  Special = new play();
-
-  // Text fonts
-  title = createFont("Georgia", 120);
-  ChooseFighter = createFont("Georgia", 120);
-  Subtitle = createFont("Georgia", 120);
-  Play = createFont("Georgia", 20); // Fixed font size for Play
-
-  // Music
-  theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3");
-  theme.loop();
-
-  // Load images
+  // Load Character Select Images
   Kyle = loadImage("KyleDefault-removebg-preview.png");
   Julia = loadImage("JuliaDefault-removebg-preview.png");
   Ravandu = loadImage("Ravandu-removebg-preview.png");
@@ -96,34 +75,41 @@ void setup() {
   DFLiam = loadImage("LiamFight.png");
   DFDavid = loadImage("DavidFight.png");
   DFKraig = loadImage("KraigFight.png");
-  
-  
-   
-    image(DFKyle, 300, 600);
-    image(DFJulia, 150, 100);
-    image(DFRavandu, 200, 100);
-    image(DFLiam, 250, 100);
-    image(DFDavid, 300, 100);
-    image(DFKraig, 320, 120);
-    
 
-  // Load Fighting Images
-  
+  // Load Attack Images
+  FSKyle = loadImage("KyleAttack.png");
+  FSJulia = loadImage("JuliaAttack.png");
+  FSRavandu = loadImage("RavanduAttack.png");
+  FSLiam = loadImage("LiamAttack.png");
+  FSDavid = loadImage("DavidAttack.png");
+  FSKraig = loadImage("KraigAttack.png");
 
-    
-    
-    
-    FSKyle = loadImage("KyleAttack.png");
-    FSJulia = loadImage("JuliaAttack.png");
-    FSRavandu = loadImage("RavanduAttack.png");
-    FSLiam = loadImage("LiamAttack.png");
-    FSDavid = loadImage("DavidAttack.png");
-    FSKraig = loadImage("KraigAttack.png");
-    
+  // Initialize objects and other variables
+  transition = new characterSelection();
+  transition2 = new FighterSelection();
+  actions = new BattleSystem();
+
+  Attack = new play();
+  Defence = new play();
+  Special = new play();
+  
+    // Music
+
+  theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3");
+  theme.loop();
 }
 
 void draw() {
   background(#FAF5E8);
+
+
+  // Text fonts
+  title = createFont("Georgia", 120);
+  ChooseFighter = createFont("Georgia", 120);
+  Subtitle = createFont("Georgia", 120);
+  Play = createFont("Georgia", 20); // Fixed font size for Play
+
+
 
   // Text
   textFont(title, 30);
@@ -148,6 +134,19 @@ void draw() {
   image(David, 300, 100);
   image(Kraig, 320, 120);
   println(battleCount);
+
+
+
+
+
+  image(DFKyle, 300, 600);
+  image(DFJulia, 150, 100);
+  image(DFRavandu, 200, 100);
+  image(DFLiam, 250, 100);
+  image(DFDavid, 300, 100);
+  image(DFKraig, 320, 120);
+
+
 
   // Transition
   if (buttonPressed) {
@@ -276,7 +275,7 @@ void keyPressed() {
           println("Player B changes to attack pose: FSKraig");
         }
       }
-      battleCount++;   
+      battleCount++;
     }
 
     // Reset when spacebar is pressed and both players have attacked
