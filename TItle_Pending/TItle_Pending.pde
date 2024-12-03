@@ -1,4 +1,4 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 
 PFont title;
 PFont ChooseFighter;
@@ -96,8 +96,30 @@ void setup() {
   DFLiam = loadImage("LiamFight.png");
   DFDavid = loadImage("DavidFight.png");
   DFKraig = loadImage("KraigFight.png");
+  
+  
+   
+    image(DFKyle, 300, 600);
+    image(DFJulia, 150, 100);
+    image(DFRavandu, 200, 100);
+    image(DFLiam, 250, 100);
+    image(DFDavid, 300, 100);
+    image(DFKraig, 320, 120);
+    
 
   // Load Fighting Images
+  
+
+    
+    
+    
+    FSKyle = loadImage("KyleAttack.png");
+    FSJulia = loadImage("JuliaAttack.png");
+    FSRavandu = loadImage("RavanduAttack.png");
+    FSLiam = loadImage("LiamAttack.png");
+    FSDavid = loadImage("DavidAttack.png");
+    FSKraig = loadImage("KraigAttack.png");
+    
 }
 
 void draw() {
@@ -253,11 +275,12 @@ void keyPressed() {
           character2 = FSKraig;
           println("Player B changes to attack pose: FSKraig");
         }
-        battleCount++;
       }
+      battleCount++;   
     }
 
-    if (battleCount == 2) {  // After both players have attacked
+    // Reset when spacebar is pressed and both players have attacked
+    if (battleCount == 2 && key == ' ') {
       // Reset images for both players to fighting stance (DF images)
       if (character1 == FSKyle) {
         character1 = DFKyle;
@@ -298,8 +321,9 @@ void keyPressed() {
         character2 = DFKraig;
         println("Player B resets to DFKraig");
       }
+
       println("Both players have reset to fighting stance.");
-      // Reset battleCount for the next round
+      battleCount = 0; // Reset battleCount for the next round
     }
   }
 }
