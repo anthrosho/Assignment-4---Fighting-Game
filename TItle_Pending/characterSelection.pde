@@ -1,6 +1,28 @@
 class characterSelection {
 
+  
+  void Fighters() {
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+  }
   void select() {
+    
+    
+
+    
+    
+    
+    
+    
     background(#FAF5E8);
     fill(#FFDBB7);
     rect(0, 200, 600, 600); // Draw the enclosing rectangle
@@ -59,5 +81,7 @@ class characterSelection {
   
   }
   }
+  
+  
   
 }
