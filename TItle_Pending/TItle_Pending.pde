@@ -15,8 +15,6 @@ int WeareFighting = 0;
 int battleCount = 0;
 int attackDelay = 0;
 
-int player1hp = 20; // ignore
-int player2hp = 20; // ignore
 
 boolean buttonPressed = false;
 boolean characterSelect = false;
@@ -45,6 +43,14 @@ PImage FSLiam;
 PImage FSDavid;
 PImage FSKraig;
 
+
+PImage FDKyle;
+PImage FDJulia;
+PImage  FDRavandu;
+PImage  FDLiam;
+PImage  FDDavid;
+PImage FDKraig;
+
 PImage character1;
 PImage character2;
 
@@ -52,15 +58,28 @@ PImage character2;
 characterSelection transition;
 FighterSelection transition2;
 BattleSystem actions;
-play Attack;
-play Defence;
-play Special;
+hpBar player1Health;
+hpBar player2Health;
 
-SoundFile theme; 
+
+
+SoundFile theme;
+
 void setup() {
   size(600, 600);
+  transition = new characterSelection();
+  transition2 = new FighterSelection();
+  actions = new BattleSystem();
 
-  // Load Character Select Images
+  player1Health = new hpBar(50, 30, 20);
+  player2Health = new hpBar(350, 30, 20);
+
+  character1Default = character1;
+  character2Default = character2;
+
+
+
+  // Load images
   Kyle = loadImage("KyleDefault-removebg-preview.png");
   Julia = loadImage("JuliaDefault-removebg-preview.png");
   Ravandu = loadImage("Ravandu-removebg-preview.png");
@@ -76,7 +95,9 @@ void setup() {
   DFDavid = loadImage("DavidFight.png");
   DFKraig = loadImage("KraigFight.png");
 
-  // Load Attack Images
+  // Load Fighting Images
+
+
   FSKyle = loadImage("KyleAttack.png");
   FSJulia = loadImage("JuliaAttack.png");
   FSRavandu = loadImage("RavanduAttack.png");
@@ -84,16 +105,21 @@ void setup() {
   FSDavid = loadImage("DavidAttack.png");
   FSKraig = loadImage("KraigAttack.png");
 
-  // Initialize objects and other variables
-  transition = new characterSelection();
-  transition2 = new FighterSelection();
-  actions = new BattleSystem();
 
-  Attack = new play();
-  Defence = new play();
-  Special = new play();
-  
-    // Music
+//Load Defence Images 
+
+
+ DFKyle =  loadImage("KyleDefence.png");
+ DFJulia = loadImage("JuliaDefence.png");
+ DFRavandu =  loadImage("RavanduDefence.png");
+ DFLiam =  loadImage("LiamDefence.png");
+ DFDavid =  loadImage("DavidDefence.png");
+ DFKraig =  loadImage("KraigDefence.png");
+
+
+
+
+  // Music
 
   theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3");
   theme.loop();
@@ -102,6 +128,12 @@ void setup() {
 void draw() {
   background(#FAF5E8);
 
+  image(DFKyle, 300, 600);
+  image(DFJulia, 150, 100);
+  image(DFRavandu, 200, 100);
+  image(DFLiam, 250, 100);
+  image(DFDavid, 300, 100);
+  image(DFKraig, 320, 120);
 
   // Text fonts
   title = createFont("Georgia", 120);
@@ -134,17 +166,6 @@ void draw() {
   image(David, 300, 100);
   image(Kraig, 320, 120);
   println(battleCount);
-
-
-
-
-
-  image(DFKyle, 300, 600);
-  image(DFJulia, 150, 100);
-  image(DFRavandu, 200, 100);
-  image(DFLiam, 250, 100);
-  image(DFDavid, 300, 100);
-  image(DFKraig, 320, 120);
 
 
 
@@ -226,8 +247,56 @@ void mousePressed() {
 
 void keyPressed() {
   if (WeareFighting == 1) {
-    if (battleCount == 0) {  // Player A's turn
+    if (battleCount == 0) {  // Player A Attack
       if (key == 'a') {
+        if (character1 == DFKyle) {
+          character1 = FSKyle;
+          println("Player A changes to attack pose: FSKyle");
+        } else if (character1 == DFJulia) {
+          character1 = FSJulia;
+          println("Player A changes to attack pose: FSJulia");
+        } else if (character1 == DFRavandu) {
+          character1 = FSRavandu;
+          println("Player A changes to attack pose: FSRavandu");
+        } else if (character1 == DFLiam) {
+          character1 = FSLiam;
+          println("Player A changes to attack pose: FSLiam");
+        } else if (character1 == DFDavid) {
+          character1 = FSDavid;
+          println("Player A changes to attack pose: FSDavid");
+        } else if (character1 == DFKraig) {
+          character1 = FSKraig;
+          println("Player A changes to attack pose: FSKraig");
+        }
+            battleCount = 1;  // Switch to Player B's turn
+  
+    }
+    } else if (battleCount == 0) {  // Player A's Defence
+      if (key == 's') {
+        // Set the correct attack image for Player A
+        if (character1 == DFKyle) {
+          character1 = FDKyle;
+          println("Player A changes to attack pose: FSKyle");
+        } else if (character1 == DFJulia) {
+          character1 = FDJulia;
+          println("Player A changes to attack pose: FSJulia");
+        } else if (character1 == DFRavandu) {
+          character1 = FDRavandu;
+          println("Player A changes to attack pose: FSRavandu");
+        } else if (character1 == DFLiam) {
+          character1 = FDLiam;
+          println("Player A changes to attack pose: FSLiam");
+        } else if (character1 == DFDavid) {
+          character1 = FDDavid;
+          println("Player A changes to attack pose: FSDavid");
+        } else if (character1 == DFKraig) {
+          character1 = FDKraig;
+          println("Player A changes to attack pose: FSKraig");
+        }
+
+      }
+    } else if (battleCount == 0) {  // Player A's Specia; 
+      if (key == 'd') {
         // Set the correct attack image for Player A
         if (character1 == DFKyle) {
           character1 = FSKyle;
@@ -249,7 +318,6 @@ void keyPressed() {
           println("Player A changes to attack pose: FSKraig");
         }
 
-        battleCount = 1;  // Switch to Player B's turn
         println("Next turn: Player B");
       }
     } else if (battleCount == 1) {  // Player B's turn
