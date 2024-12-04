@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*;  //<>//
 
 PFont title;
 PFont ChooseFighter;
@@ -19,8 +19,11 @@ int attackDelay = 0;
 boolean buttonPressed = false;
 boolean characterSelect = false;
 
-PImage character1Default;
-PImage character2Default;
+PImage character1;
+PImage character2;
+
+
+
 
 PImage Kyle;
 PImage Julia;
@@ -44,15 +47,21 @@ PImage FSDavid;
 PImage FSKraig;
 
 
-PImage FDKyle;
-PImage FDJulia;
-PImage  FDRavandu;
-PImage  FDLiam;
-PImage  FDDavid;
-PImage FDKraig;
+PImage FBKyle;
+PImage FBJulia;
+PImage  FBRavandu;
+PImage  FBLiam;
+PImage  FBDavid;
+PImage FBKraig;
 
-PImage character1;
-PImage character2;
+
+PImage SSKyle;
+PImage SSJulia;
+PImage SSRavandu;
+PImage SSLiam;
+PImage SSDavid;
+PImage SSKraig;
+
 
 //Objects
 characterSelection transition;
@@ -73,9 +82,6 @@ void setup() {
 
   player1Health = new hpBar(50, 30, 20);
   player2Health = new hpBar(350, 30, 20);
-
-  character1Default = character1;
-  character2Default = character2;
 
 
 
@@ -106,17 +112,25 @@ void setup() {
   FSKraig = loadImage("KraigAttack.png");
 
 
-//Load Defence Images 
+  //Load Block Images
 
+  FBKyle =  loadImage("KyleBlock.png");
+  FBJulia = loadImage("JuliaBlock.png");
+  FBRavandu =  loadImage("RavanduDefence.png");
+  FBLiam =  loadImage("LiamBlock.png");
+  FBDavid =  loadImage("DavidBlock.png");
+  FBKraig =  loadImage("KraigBlock.png");
 
- DFKyle =  loadImage("KyleDefence.png");
- DFJulia = loadImage("JuliaDefence.png");
- DFRavandu =  loadImage("RavanduDefence.png");
- DFLiam =  loadImage("LiamDefence.png");
- DFDavid =  loadImage("DavidDefence.png");
- DFKraig =  loadImage("KraigDefence.png");
+  //Load Special Images
 
-
+   SSKyle=  loadImage("KyleSpecial.png");
+   SSJulia=  loadImage("JuliaSpecial.png");
+   SSRavandu=  loadImage("RavanduSpecial.png");
+   SSLiam=  loadImage("LiamSpecial.png");
+   SSDavid=  loadImage("DavidSpecial.png");
+   SSKraig=  loadImage("KraigSpecial.png");
+   
+   arena = loadImage("BattleArena.png"); 
 
 
   // Music
@@ -128,12 +142,6 @@ void setup() {
 void draw() {
   background(#FAF5E8);
 
-  image(DFKyle, 300, 600);
-  image(DFJulia, 150, 100);
-  image(DFRavandu, 200, 100);
-  image(DFLiam, 250, 100);
-  image(DFDavid, 300, 100);
-  image(DFKraig, 320, 120);
 
   // Text fonts
   title = createFont("Georgia", 120);
@@ -247,150 +255,137 @@ void mousePressed() {
 
 void keyPressed() {
   if (WeareFighting == 1) {
-    if (battleCount == 0) {  // Player A Attack
+    if (battleCount == 0) {
+      // Player A's turn (Attack, Block, Special)
       if (key == 'a') {
         if (character1 == DFKyle) {
           character1 = FSKyle;
-          println("Player A changes to attack pose: FSKyle");
         } else if (character1 == DFJulia) {
           character1 = FSJulia;
-          println("Player A changes to attack pose: FSJulia");
         } else if (character1 == DFRavandu) {
           character1 = FSRavandu;
-          println("Player A changes to attack pose: FSRavandu");
         } else if (character1 == DFLiam) {
           character1 = FSLiam;
-          println("Player A changes to attack pose: FSLiam");
         } else if (character1 == DFDavid) {
           character1 = FSDavid;
-          println("Player A changes to attack pose: FSDavid");
         } else if (character1 == DFKraig) {
           character1 = FSKraig;
-          println("Player A changes to attack pose: FSKraig");
         }
-            battleCount = 1;  // Switch to Player B's turn
-  
-    }
-    } else if (battleCount == 0) {  // Player A's Defence
-      if (key == 's') {
-        // Set the correct attack image for Player A
+        battleCount = 1;
+      } else if (key == 's') {  // Block action
         if (character1 == DFKyle) {
-          character1 = FDKyle;
-          println("Player A changes to attack pose: FSKyle");
+          character1 = FBKyle;
         } else if (character1 == DFJulia) {
-          character1 = FDJulia;
-          println("Player A changes to attack pose: FSJulia");
+          character1 = FBJulia;
         } else if (character1 == DFRavandu) {
-          character1 = FDRavandu;
-          println("Player A changes to attack pose: FSRavandu");
+          character1 = FBRavandu;
         } else if (character1 == DFLiam) {
-          character1 = FDLiam;
-          println("Player A changes to attack pose: FSLiam");
+          character1 = FBLiam;
         } else if (character1 == DFDavid) {
-          character1 = FDDavid;
-          println("Player A changes to attack pose: FSDavid");
+          character1 = FBDavid;
         } else if (character1 == DFKraig) {
-          character1 = FDKraig;
-          println("Player A changes to attack pose: FSKraig");
+          character1 = FBKraig;
         }
-
-      }
-    } else if (battleCount == 0) {  // Player A's Specia; 
-      if (key == 'd') {
-        // Set the correct attack image for Player A
+        battleCount = 1;
+      } else if (key == 'd') {  // Special action
         if (character1 == DFKyle) {
-          character1 = FSKyle;
-          println("Player A changes to attack pose: FSKyle");
+          character1 = SSKyle;
         } else if (character1 == DFJulia) {
-          character1 = FSJulia;
-          println("Player A changes to attack pose: FSJulia");
+          character1 = SSJulia;
         } else if (character1 == DFRavandu) {
-          character1 = FSRavandu;
-          println("Player A changes to attack pose: FSRavandu");
+          character1 = SSRavandu;
         } else if (character1 == DFLiam) {
-          character1 = FSLiam;
-          println("Player A changes to attack pose: FSLiam");
+          character1 = SSLiam;
         } else if (character1 == DFDavid) {
-          character1 = FSDavid;
-          println("Player A changes to attack pose: FSDavid");
+          character1 = SSDavid;
         } else if (character1 == DFKraig) {
-          character1 = FSKraig;
-          println("Player A changes to attack pose: FSKraig");
+          character1 = SSKraig;
         }
-
-        println("Next turn: Player B");
+        battleCount = 1;
       }
-    } else if (battleCount == 1) {  // Player B's turn
-      if (key == 'j') {  // Player B presses 'j'
-        // Set the correct attack image for Player B
+    } else if (battleCount == 1) {  // Player B's Attack
+      if (key == 'j') {
         if (character2 == DFKyle) {
-          character2 = FSKyle;
-          println("Player B changes to attack pose: FSKyle");
+          character2 = SSKyle;
         } else if (character2 == DFJulia) {
           character2 = FSJulia;
-          println("Player B changes to attack pose: FSJulia");
         } else if (character2 == DFRavandu) {
           character2 = FSRavandu;
-          println("Player B changes to attack pose: FSRavandu");
         } else if (character2 == DFLiam) {
           character2 = FSLiam;
-          println("Player B changes to attack pose: FSLiam");
         } else if (character2 == DFDavid) {
           character2 = FSDavid;
-          println("Player B changes to attack pose: FSDavid");
         } else if (character2 == DFKraig) {
           character2 = FSKraig;
-          println("Player B changes to attack pose: FSKraig");
         }
+        battleCount = 2;
+      } else if (key == 'k') {
+        if (character2 == DFKyle) {
+          character2 = FBKyle;
+        } else if (character2 == DFJulia) {
+          character2 = FBJulia;
+        } else if (character2 == DFRavandu) {
+          character2 = FBRavandu;
+        } else if (character2 == DFLiam) {
+          character2 = FBLiam;
+        } else if (character2 == DFDavid) {
+          character2 = FBDavid;
+        } else if (character2 == DFKraig) {
+          character2 = FBKraig;
+        }
+        battleCount = 2;
+      } else if (key == 'l') {
+        if (character2 == DFKyle) {
+          character2 = SSKyle;
+        } else if (character2 == DFJulia) {
+          character2 = SSJulia;
+        } else if (character2 == DFRavandu) {
+          character2 = SSRavandu;
+        } else if (character2 == DFLiam) {
+          character2 = SSLiam;
+        } else if (character2 == DFDavid) {
+          character2 = SSDavid;
+        } else if (character2 == DFKraig) {
+          character2 = SSKraig;
+        }
+        battleCount = 2;
       }
-      battleCount++;
     }
 
-    // Reset when spacebar is pressed and both players have attacked
+    // Reset both players when spacebar is pressed
     if (battleCount == 2 && key == ' ') {
-      // Reset images for both players to fighting stance (DF images)
-      if (character1 == FSKyle) {
+      // Reset both characters to their default images
+      if (character1 == FSKyle || character1 == FBKyle || character1 == SSKyle) {
         character1 = DFKyle;
-        println("Player A resets to DFKyle");
-      } else if (character1 == FSJulia) {
+      } else if (character1 == FSJulia || character1 == FBJulia || character1 == SSJulia) {
         character1 = DFJulia;
-        println("Player A resets to DFJulia");
-      } else if (character1 == FSRavandu) {
+      } else if (character1 == FSRavandu || character1 == FBRavandu || character1 == SSRavandu) {
         character1 = DFRavandu;
-        println("Player A resets to DFRavandu");
-      } else if (character1 == FSLiam) {
+      } else if (character1 == FSLiam || character1 == FBLiam || character1 == SSLiam) {
         character1 = DFLiam;
-        println("Player A resets to DFLiam");
-      } else if (character1 == FSDavid) {
+      } else if (character1 == FSDavid || character1 == FBDavid || character1 == SSDavid) {
         character1 = DFDavid;
-        println("Player A resets to DFDavid");
-      } else if (character1 == FSKraig) {
+      } else if (character1 == FSKraig || character1 == FBKraig || character1 == SSKraig) {
         character1 = DFKraig;
-        println("Player A resets to DFKraig");
       }
 
-      if (character2 == FSKyle) {
+      if (character2 == FSKyle || character2 == FBKyle || character2 == SSKyle) {
         character2 = DFKyle;
-        println("Player B resets to DFKyle");
-      } else if (character2 == FSJulia) {
+      } else if (character2 == FSJulia || character2 == FBJulia || character2 == SSJulia) {
         character2 = DFJulia;
-        println("Player B resets to DFJulia");
-      } else if (character2 == FSRavandu) {
+      } else if (character2 == FSRavandu || character2 == FBRavandu || character2 == SSRavandu) {
         character2 = DFRavandu;
-        println("Player B resets to DFRavandu");
-      } else if (character2 == FSLiam) {
+      } else if (character2 == FSLiam || character2 == FBLiam || character2 == SSLiam) {
         character2 = DFLiam;
-        println("Player B resets to DFLiam");
-      } else if (character2 == FSDavid) {
+      } else if (character2 == FSDavid || character2 == FBDavid || character2 == SSDavid) {
         character2 = DFDavid;
-        println("Player B resets to DFDavid");
-      } else if (character2 == FSKraig) {
+      } else if (character2 == FSKraig || character2 == FBKraig || character2 == SSKraig) {
         character2 = DFKraig;
-        println("Player B resets to DFKraig");
       }
 
+      // Reset the battle count for the next round
+      battleCount = 0;
       println("Both players have reset to fighting stance.");
-      battleCount = 0; // Reset battleCount for the next round
     }
   }
 }
