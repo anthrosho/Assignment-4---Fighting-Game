@@ -388,4 +388,7 @@ void keyPressed() {
       println("Both players have reset to fighting stance.");
     }
   }
+   if (WeareFighting == 1) {
+    actions.playerAction(key);
+  }
 }
