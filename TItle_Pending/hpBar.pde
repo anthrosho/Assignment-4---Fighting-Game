@@ -10,6 +10,9 @@ class hpBar {
     currentHP = maxHP;
     width = 200;
     height = 20;
+    
+    
+    
   }
 
   void decreaseHP(int amount) {
@@ -21,7 +24,7 @@ class hpBar {
   }
 
   void display() {
-    fill(150); // Gray background for HP bar
+    fill(150); 
     rect(x, y, width, height);
 
     fill(0, 255, 0);

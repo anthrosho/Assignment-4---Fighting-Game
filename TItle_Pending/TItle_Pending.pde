@@ -1,4 +1,4 @@
-import processing.sound.*;  //<>//
+import processing.sound.*; //<>//
 
 PFont title;
 PFont ChooseFighter;
@@ -15,15 +15,12 @@ int WeareFighting = 0;
 int battleCount = 0;
 int attackDelay = 0;
 
-
 boolean buttonPressed = false;
 boolean characterSelect = false;
+boolean gameOver = false;
 
 PImage character1;
 PImage character2;
-
-
-
 
 PImage Kyle;
 PImage Julia;
@@ -46,14 +43,12 @@ PImage FSLiam;
 PImage FSDavid;
 PImage FSKraig;
 
-
 PImage FBKyle;
 PImage FBJulia;
 PImage  FBRavandu;
 PImage  FBLiam;
 PImage  FBDavid;
 PImage FBKraig;
-
 
 PImage SSKyle;
 PImage SSJulia;
@@ -62,30 +57,46 @@ PImage SSLiam;
 PImage SSDavid;
 PImage SSKraig;
 
+PImage VKyle;
+PImage VJulia;
+PImage VRavandu;
+PImage VLiam;
+PImage VDavid;
+PImage VKraig;
 
-//Objects
+PImage DKyle;
+PImage DJulia;
+PImage DRavandu;
+PImage DLiam;
+PImage DDavid;
+PImage DKraig;
+
+// Objects
 characterSelection transition;
 FighterSelection transition2;
 BattleSystem actions;
 hpBar player1Health;
 hpBar player2Health;
 
-
-
 SoundFile theme;
+
+// Variables for bouncing circle
+float circleX = 300; // Initial X position
+float circleY = 150; // Initial Y position
+float circleRadius = 30; // Radius of the circle
+float xSpeed = 2.5; // Speed of the circle in X direction
+float ySpeed = 2; // Speed of the circle in Y direction
 
 void setup() {
   size(600, 600);
   transition = new characterSelection();
   transition2 = new FighterSelection();
   actions = new BattleSystem();
-
+  
   player1Health = new hpBar(50, 30, 20);
   player2Health = new hpBar(350, 30, 20);
-
-
-
-  // Load images
+  
+  // Load images and assets
   Kyle = loadImage("KyleDefault-removebg-preview.png");
   Julia = loadImage("JuliaDefault-removebg-preview.png");
   Ravandu = loadImage("Ravandu-removebg-preview.png");
@@ -102,8 +113,6 @@ void setup() {
   DFKraig = loadImage("KraigFight.png");
 
   // Load Fighting Images
-
-
   FSKyle = loadImage("KyleAttack.png");
   FSJulia = loadImage("JuliaAttack.png");
   FSRavandu = loadImage("RavanduAttack.png");
@@ -111,75 +120,101 @@ void setup() {
   FSDavid = loadImage("DavidAttack.png");
   FSKraig = loadImage("KraigAttack.png");
 
-
-  //Load Block Images
-
-  FBKyle =  loadImage("KyleBlock.png");
+  // Load Block Images
+  FBKyle = loadImage("KyleBlock.png");
   FBJulia = loadImage("JuliaBlock.png");
-  FBRavandu =  loadImage("RavanduDefence.png");
-  FBLiam =  loadImage("LiamBlock.png");
-  FBDavid =  loadImage("DavidBlock.png");
-  FBKraig =  loadImage("KraigBlock.png");
+  FBRavandu = loadImage("RavanduDefence.png");
+  FBLiam = loadImage("LiamBlock.png");
+  FBDavid = loadImage("DavidBlock.png");
+  FBKraig = loadImage("KraigBlock.png");
 
-  //Load Special Images
+  // Load Special Images
+  SSKyle= loadImage("KyleSpecial.png");
+  SSJulia= loadImage("JuliaSpecial.png");
+  SSRavandu= loadImage("RavanduSpecial.png");
+  SSLiam= loadImage("LiamSpecial.png");
+  SSDavid= loadImage("DavidSpecial.png");
+  SSKraig= loadImage("KraigSpecial.png");
 
-   SSKyle=  loadImage("KyleSpecial.png");
-   SSJulia=  loadImage("JuliaSpecial.png");
-   SSRavandu=  loadImage("RavanduSpecial.png");
-   SSLiam=  loadImage("LiamSpecial.png");
-   SSDavid=  loadImage("DavidSpecial.png");
-   SSKraig=  loadImage("KraigSpecial.png");
-   
-   arena = loadImage("BattleArena.png"); 
+  // Load Victory Images
+  VKyle= loadImage("KyleVictory.png");
+  VJulia= loadImage("JuliaVictory.png");
+  VRavandu= loadImage("RavanduVictory.png");
+  VLiam= loadImage("LiamVictory.png");
+  VDavid= loadImage("DavidVictory.png");
+  VKraig= loadImage("KraigVictory.png");
 
+  // Load Defeat Images
+  DKyle= loadImage("KyleDefeat.png");
+  DJulia= loadImage("JuliaDefeat.png");
+  DRavandu= loadImage("RavanduDefeat.png");
+  DLiam= loadImage("LiamDefeat.png");
+  DDavid= loadImage("DavidDefeat.png");
+  DKraig= loadImage("KraigDefeat.png");
+
+  // Load arena image
+  arena = loadImage("BattleArena.png");
 
   // Music
-
   theme = new SoundFile(this, "Sword_Fight_On_The_Heights.mp3");
   theme.loop();
 }
 
 void draw() {
+  
+  println(gameOver); 
+  // MENU
   background(#FAF5E8);
-
-
-  // Text fonts
   title = createFont("Georgia", 120);
   ChooseFighter = createFont("Georgia", 120);
   Subtitle = createFont("Georgia", 120);
   Play = createFont("Georgia", 20); // Fixed font size for Play
-
-
-
-  // Text
   textFont(title, 30);
   fill(#030303);
   text("TITLE PENDING!!!!", 140, 80);
-
   textFont(Subtitle, 20);
   fill(#030202);
   text("Names not decided.", 20, 160);
   fill(#DBD9D9);
   rect(0, 280, 150, 100);
-
   textFont(Play, 20);
   fill(#030303);
   text("Play", 50, 340);
 
-  // Images
+  // Images (Character images)
   image(Kyle, 100, 100);
   image(Julia, 150, 100);
   image(Ravandu, 200, 100);
   image(Liam, 250, 100);
   image(David, 300, 100);
   image(Kraig, 320, 120);
-  println(battleCount);
 
+  // Add the bouncing circle
+  drawBouncingCircle();
 
-
-  // Transition
+  // Transition logic
   if (buttonPressed) {
     transition.select();
+  }
+}
+
+void drawBouncingCircle() {
+  // Draw the bouncing circle
+  fill(0, 150, 255); // Blue color for the circle
+  noStroke();
+  ellipse(circleX, circleY, circleRadius * 2, circleRadius * 2);
+
+  // Update the circle's position
+  circleX += xSpeed;
+  circleY += ySpeed;
+
+  // Bounce the circle off the edges of the screen
+  if (circleX > width - circleRadius || circleX < circleRadius) {
+    xSpeed *= -1; // Reverse direction on X axis
+  }
+
+  if (circleY > height - circleRadius || circleY < circleRadius) {
+    ySpeed *= -1; // Reverse direction on Y axis
   }
 }
 
@@ -250,9 +285,13 @@ void mousePressed() {
     // Play button clicked
     buttonPressed = true;
     characterSelect = true;
+    rect(0, 280, 150, 100);
+  }
+  if (gameOver && mouseX >= 250 && mouseX <= 350 && mouseY >= 500 && mouseY <= 550) {
+    // Reset the game
+    battleCount = 0; // Reset battle state
   }
 }
-
 void keyPressed() {
   if (WeareFighting == 1) {
     if (battleCount == 0) {
@@ -385,10 +424,9 @@ void keyPressed() {
 
       // Reset the battle count for the next round
       battleCount = 0;
-      println("Both players have reset to fighting stance.");
     }
   }
-   if (WeareFighting == 1) {
+  if (WeareFighting == 1) {
     actions.playerAction(key);
   }
 }
