@@ -194,6 +194,12 @@ void draw() {
   // Transition logic
   if (buttonPressed) {
     transition.select();
+    
+    
+    println("PLAYER 1 CONTROLS = A FOR ATTACK, S FOR DEFENCE, D FOR SPECIAL");
+        println("PLAYER 2 CONTROLS = J FOR ATTACK, K FOR DEFENCE, L FOR SPECIAL");
+        println("spacebar after each player input action to reset poses"); 
+
   }
 }
 
