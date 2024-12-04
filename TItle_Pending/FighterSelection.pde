@@ -6,7 +6,7 @@ class FighterSelection {
     background(255);
     image(character1, 50, 100);
     character1.resize(300, 600);
-
+//Flipping the character 
     actions.ActionEconomy();
       pushMatrix();
     scale(-1, 1);

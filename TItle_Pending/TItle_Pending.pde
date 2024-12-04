@@ -80,7 +80,7 @@ hpBar player2Health;
 
 SoundFile theme;
 
-// Variables for bouncing circle
+// Variables for bouncing circle. Just to get the PVector accel requirments ugh. 
 float circleX = 300; // Initial X position
 float circleY = 150; // Initial Y position
 float circleRadius = 30; // Radius of the circle
@@ -162,7 +162,6 @@ void setup() {
 
 void draw() {
   
-  println(gameOver); 
   // MENU
   background(#FAF5E8);
   title = createFont("Georgia", 120);
@@ -221,7 +220,7 @@ void drawBouncingCircle() {
 void mousePressed() {
   // Character Selection
   if (buttonPressed) {
-    // Character selection rectangle checks
+    // Character selection 
     if (mouseX >= 0 && mouseX <= 150 && mouseY >= 180 && mouseY <= 380) {
       if (fighterCount == 0) {
         character1 = DFKyle;
@@ -293,6 +292,8 @@ void mousePressed() {
   }
 }
 void keyPressed() {
+  
+  // ACTION TURNS. 
   if (WeareFighting == 1) {
     if (battleCount == 0) {
       // Player A's turn (Attack, Block, Special)
